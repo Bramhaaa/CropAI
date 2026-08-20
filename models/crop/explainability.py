@@ -1,0 +1,91 @@
+import matplotlib
+matplotlib.use('Agg') # Non-interactive backend
+import matplotlib.pyplot as plt
+import numpy as np
+import shap
+
+class CropExplainer:
+    def __init__(self, model_service):
+        self.model_service = model_service
+        # Get base estimator from the FrozenEstimator wrapped inside calibrated classifier
+        frozen_estimator = self.model_service.model.calibrated_classifiers_[0].estimator
+        self.base_model = frozen_estimator.estimator
+        self.feature_names = self.model_service.feature_names
+        
+        # Instantiate TreeExplainer
+        self.explainer = shap.TreeExplainer(self.base_model)
+
+    def explain_prediction(self, input_data: dict, predicted_crop: str):
+        """
+        Calculates local SHAP feature contributions for a specific prediction.
+        """
+        # Encode prediction
+        predicted_idx = self.model_service.label_encoder.transform([predicted_crop])[0]
+        
+        # Scale inputs
+        values = [input_data[name] for name in self.feature_names]
+        X = np.array([values])
+        X_scaled = self.model_service.scaler.transform(X)
+        
+        # Compute SHAP values
+        # shap_values output shape depends on model type.
+        # For multi-class XGBClassifier, it is typically list of length num_classes, each of shape (num_samples, num_features)
+        # or a single array of shape (num_samples, num_features, num_classes)
+        shap_out = self.explainer.shap_values(X_scaled)
+        
+        if isinstance(shap_out, list):
+            # List of length classes
+            class_shap = shap_out[predicted_idx][0]
+        elif isinstance(shap_out, np.ndarray):
+            if len(shap_out.shape) == 3:
+                # Shape: (num_samples, num_features, num_classes)
+                class_shap = shap_out[0, :, predicted_idx]
+            elif len(shap_out.shape) == 2:
+                # Binary/Single class shape: (num_samples, num_features)
+                class_shap = shap_out[0]
+            else:
+                class_shap = shap_out
+        else:
+            class_shap = np.zeros(len(self.feature_names))
+            
+        # Create mapping
+        contributions = []
+        for i, name in enumerate(self.feature_names):
+            contributions.append({
+                "feature": name,
+                "value": float(values[i]),
+                "shap_value": float(class_shap[i])
+            })
+            
+        # Sort by absolute SHAP value
+        contributions = sorted(contributions, key=lambda x: abs(x["shap_value"]), reverse=True)
+        return contributions
+
+def generate_shap_bar_plot(contributions, predicted_crop):
+    """
+    Creates a Matplotlib horizontal bar chart of the SHAP feature contributions.
+    Returns: matplotlib Figure.
+    """
+    # Sort contributions by raw SHAP value so they display logically
+    sorted_contribs = sorted(contributions, key=lambda x: x["shap_value"])
+    
+    features = [c["feature"] for c in sorted_contribs]
+    shap_vals = [c["shap_value"] for c in sorted_contribs]
+    colors = ['#2ca02c' if v >= 0 else '#d62728' for v in shap_vals] # Green for positive, red for negative
+    
+    fig, ax = plt.subplots(figsize=(6, 4))
+    bars = ax.barh(features, shap_vals, color=colors, edgecolor='none', height=0.6)
+    
+    # Customize plot styling (rich premium look)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_color('#cccccc')
+    ax.spines['bottom'].set_color('#cccccc')
+    ax.tick_params(colors='#666666')
+    ax.axvline(0, color='#cccccc', linewidth=0.8, linestyle='--')
+    
+    plt.title(f"Feature Contribution for: {predicted_crop}", fontsize=11, fontweight='bold', pad=15, color='#333333')
+    plt.xlabel("SHAP Value (Impact on prediction)", fontsize=9, color='#666666')
+    plt.tight_layout()
+    
+    return fig

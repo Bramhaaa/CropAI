@@ -1,131 +1,182 @@
-# Agents Workspace
+# CropAI — Explainable, Uncertainty-Aware Agricultural Decision Support System
 
-This repository is a reusable workspace for AI agent instructions, persistent project memory, and workflow templates. It is intentionally lightweight: instead of containing a product codebase, it provides a structured operating environment that future sessions can reuse across many different projects.
+CropAI is a decoupled multi-service agricultural support platform. It implements three independent machine learning pipelines providing disease diagnosis, crop recommendation, and yield estimation with calibrated confidence limits and local explainability models.
 
-The main goal is consistency. Each session should be able to recover context quickly, make small and verifiable changes, and preserve durable knowledge in a predictable place.
+---
 
-## What This Repository Contains
+## 1. System Architecture
 
-The repository is organized around three layers:
+CropAI uses a decoupled, service-oriented architecture keeping the front-end interface separated from the backend ML serving model container:
 
-1. Repository-level instructions that define how the agent should behave.
-2. Persistent memory under `.agent/memory/` that stores project knowledge over time.
-3. Reusable workflow and template files under `.agent/workflows/` and `.agent/templates/`.
+```text
+    [ Streamlit Frontend UI (Port 8501) ] 
+                     │
+             HTTP (REST / JSON)
+                     ▼
+       [ FastAPI Serving API (Port 8000) ]
+                     │
+         ┌───────────┼───────────┐
+         ▼           ▼           ▼
+      [Disease]   [Crop]      [Yield]
+      Services   Services    Services
+         │           │           │
+      [MobileNet] [Random]    [Random]
+       (PyTorch)  (Forest)    (Forest)
+         │           │           │
+     [Grad-CAM]    [SHAP]      [SHAP]
+     (Explanations) (Explanations) (Explanations)
+         │           │           │
+     [Entropy]  [Isotonic]   [Conformal]
+    (Uncertainty) (Calibration) (Intervals)
+```
 
-Together, these files let the workspace act like a memory-backed operating system for future agent sessions.
+---
 
-## Core Ideas
+## 2. Setup & Installation
 
-### Persistent Memory
+### Prerequisite
+- Python 3.12+
+- Virtual Environment tool (`venv`)
 
-The memory folder is where durable project knowledge lives. It is meant to be concise, factual, and useful for later sessions that need to resume work without rescanning the entire repository.
+### 1. Initialize Virtual Environment
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
-The standard memory files are:
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-- `overview.md` for the project summary
-- `architecture.md` for high-level structure and flow
-- `index.md` for a semantic map of important features and files
-- `current.md` for the current working state
-- `decisions.md` for durable architectural or workflow decisions
-- `roadmap.md` for completed, in-progress, and planned work
-- `known_issues.md` for visible issues, TODOs, and warnings
-- `sessions/` for chronological session summaries
+---
 
-### Workflow Templates
+## 3. Dataset Setup
 
-The workflow files in `.agent/workflows/` define repeatable operating procedures for the agent.
+All datasets used by CropAI are documented in [data/README.md](file:///Users/bramhabajannavar/Desktop/Major%20project/data/README.md). To generate the synthetic datasets for local training:
+```bash
+python3 data/generate_datasets.py
+```
+This will populate `data/disease/`, `data/crop/`, and `data/yield/` with split partitions.
 
-- `initialize.md` describes how to build the initial memory set
-- `start.md` describes how to resume from existing memory
-- `checkpoint.md` describes how to save progress during a session
-- `refresh.md` describes how to rebuild memory after meaningful repository changes
-- `shutdown.md` describes how to close a session and update the affected memory files
-- `review.md` describes how to inspect work for correctness and consistency
+---
 
-### Reusable Memory Templates
+## 4. Training & Serialization
 
-The template files in `.agent/templates/` define the expected structure for future memory files. They are generic and do not assume any specific project type.
+To train the models and export serialized binary checkpoints to the `artifacts/` folder:
 
-- `overview.md`
-- `architecture.md`
-- `current.md`
-- `decision.md`
-- `session.md`
+```bash
+# 1. Train Leaf Disease Classification Model (MobileNetV3 PyTorch)
+python3 training/disease/train_disease.py
 
-## How the Agent Should Use This Repository
+# 2. Train Crop Recommendation Classifier (Calibrated Random Forest)
+python3 training/crop/train_crop.py
 
-The intended workflow is simple:
+# 3. Train Crop Yield Regressor (Random Forest + Conformal Residuals)
+python3 training/yield/train_yield.py
+```
 
-1. Read the repository instructions first.
-2. Load the persistent memory files in the defined order.
-3. Consult the semantic index before searching broadly.
-4. Make the smallest change that solves the task.
-5. Update only the memory files that changed in meaning.
-6. Preserve historical session notes rather than rewriting them.
+---
 
-This approach keeps the workspace efficient and prevents the agent from repeatedly rediscovering the same context.
+## 5. Running the Application
 
-## Memory Update Principles
+### Running the serving API (FastAPI)
+```bash
+uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+```
+The interactive Swagger API documentation will be available at: `http://localhost:8000/docs`.
 
-The persistent memory should stay high signal. Use it to store facts that are stable enough to help future sessions, not raw notes or full source copies.
+### Running the User Interface (Streamlit)
+```bash
+streamlit run app/streamlit_app.py --server.port=8501
+```
+Access the dashboard at `http://localhost:8501`.
 
-Good memory content includes:
+---
 
-- Repository purpose
-- Important architecture decisions
-- Major folders and file responsibilities
-- Current working state
-- Durable blockers or known issues
-- Verified session outcomes
+## 6. Docker Container Deployment
 
-Avoid putting these into memory:
+To launch the multi-container stack (FastAPI backend + Streamlit frontend):
 
-- Long code snippets
-- Unverified guesses
-- Temporary debug notes
-- Full directory trees
-- Redundant copy-paste from source files
+```bash
+docker-compose up --build
+```
+This command compiles the `Dockerfile` into separate communicating services on a bridge network.
 
-## Repository Layout
+---
 
-The current top-level structure is intentionally small:
+## 7. Serving API Endpoints
 
-- `.agent/` contains instructions, memory, workflows, templates, and repository-specific support files
-- `AGENT.md` contains permanent operating rules for the agent in this workspace
-- `PROMPT.md` contains the repository initialization guidance and memory system expectations
-- `README.md` provides this overview for humans and agents alike
+### 1. Health Check
+`GET /health`
+- **Response:** `{"status": "ok", "models_loaded": {"disease": true, "crop": true, "yield": true}}`
 
-Inside `.agent/`, the main subdirectories are:
+### 2. Leaf Disease Diagnosis
+`POST /api/v1/disease/predict` (Content-Type: `multipart/form-data`)
+- **Payload:** `image=<binary_file>`
+- **Response:**
+  ```json
+  {
+    "prediction": "Tomato___Late_blight",
+    "confidence": 0.94,
+    "top_predictions": [{"class": "Tomato___Late_blight", "probability": 0.94}, ...],
+    "uncertainty": {"entropy": 0.12, "reliability": "High", "method": "mc_dropout"},
+    "explanation": {"explanation_available": true, "overlay_base64": "..."}
+  }
+  ```
 
-- `.agent/memory/` for durable project knowledge
-- `.agent/workflows/` for agent lifecycle procedures
-- `.agent/templates/` for reusable memory file structures
+### 3. Crop Recommendation
+`POST /api/v1/crop/recommend` (Content-Type: `application/json`)
+- **Payload:**
+  ```json
+  {
+    "nitrogen": 80.0,
+    "phosphorus": 45.0,
+    "potassium": 40.0,
+    "temperature": 25.0,
+    "humidity": 80.0,
+    "ph": 6.5,
+    "rainfall": 120.0
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "recommended_crop": "Rice",
+    "confidence": 0.87,
+    "top_recommendations": [{"crop": "Rice", "probability": 0.87}, ...],
+    "reliability": "High",
+    "explanation": {"top_features": [{"feature": "rainfall", "value": 120.0, "shap_value": 0.31}, ...]}
+  }
+  ```
 
-## Recommended Session Flow
+### 4. Yield Prediction
+`POST /api/v1/yield/predict` (Content-Type: `application/json`)
+- **Payload:**
+  ```json
+  {
+    "crop": "Rice",
+    "season": "Kharif",
+    "rainfall": 1100.0,
+    "temperature": 26.0,
+    "area": 2.5,
+    "confidence_level": 0.90
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "predicted_yield": 4.82,
+    "unit": "tonnes/hectare",
+    "interval": {"lower": 4.12, "upper": 5.54, "confidence_level": 0.90, "interval_width": 1.42},
+    "explanation": {"top_features": [{"feature": "rainfall", "shap_value": 0.28}, ...]}
+  }
+  ```
 
-For a new or returning session, the intended flow is:
+---
 
-1. Start by reading the repository instructions.
-2. Load the memory files in order.
-3. Use the index to find the relevant feature or area.
-4. Inspect only the minimum additional files needed for the task.
-5. Make the change.
-6. Validate the result.
-7. Save the session state in memory.
+## 8. Model Limitations & Disclaimers
 
-This sequence is designed to keep work grounded and avoid unnecessary repository scanning.
-
-## Maintaining The Workspace
-
-If you extend this repository, keep the following in mind:
-
-- Update memory only when the repository meaningfully changes.
-- Keep the workflow files generic so they remain useful across projects.
-- Preserve the distinction between memory, templates, and live source files.
-- Prefer small, deliberate edits over broad rewrites.
-
-## Notes For Future Projects
-
-This workspace is meant to be copied or adapted for other software projects. The memory files should be repopulated from the new repository’s evidence, while the workflow and template files can usually be reused as-is.
-
-If the repository is used as a starter kit for other projects, the first thing to update should be the memory set, followed by any workflow refinements needed for that new codebase.
+- **Synthetic Training Scope:** Currently trained on generated datasets. Must be re-trained on actual PlantVillage/Kaggle dataset binaries before field use.
+- **Grad-CAM Constraints:** CAM activation maps display spatial pixel correlation outputs, not clinical causal proof of leaf tissue diseases.
+- **Decision Support Only:** CropAI outputs represent non-prescriptive recommendation bounds intended as professional decision support. Agronomic outcomes are not guaranteed.
