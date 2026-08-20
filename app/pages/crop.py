@@ -35,9 +35,9 @@ st.markdown("""
         color: #555555;
     }
 </style>
-""", unsafe_style_html=True)
+""", unsafe_allow_html=True)
 
-st.markdown("<h1 class='section-title'>🚜 Crop Recommendation</h1>", unsafe_style_html=True)
+st.markdown("<h1 class='section-title'>🚜 Crop Recommendation</h1>", unsafe_allow_html=True)
 st.write("Input soil chemical properties and climatic metrics to receive a calibrated recommendation of the most suitable crop.")
 
 st.write("---")
@@ -95,7 +95,7 @@ with col_right:
                 <div class="metric-label">Recommended Crop</div>
                 <div class="metric-value">{crop}</div>
             </div>
-            """, unsafe_style_html=True)
+            """, unsafe_allow_html=True)
             
         with col_m2:
             st.markdown(f"""
@@ -103,7 +103,7 @@ with col_right:
                 <div class="metric-label">Calibrated Probability</div>
                 <div class="metric-value">{conf * 100:.1f}%</div>
             </div>
-            """, unsafe_style_html=True)
+            """, unsafe_allow_html=True)
             
         # Reliability status
         rel_color = {"High": "green", "Medium": "orange", "Low": "red"}[rel]

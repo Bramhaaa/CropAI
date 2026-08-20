@@ -20,11 +20,11 @@ class YieldInferenceService:
             self.conformal_residuals = pickle.load(f)
             
         self.categorical_cols = ["crop", "season"]
-        self.numeric_cols = ["rainfall", "temperature", "area"]
+        self.numeric_cols = ["area_hectares"]
 
     def predict(self, input_data: dict, confidence_level: float = 0.90):
         """
-        Input: dict with keys: crop, season, rainfall, temperature, area.
+        Input: dict with keys: crop, season, area_hectares.
         """
         # Convert to DataFrame
         df = pd.DataFrame([input_data])

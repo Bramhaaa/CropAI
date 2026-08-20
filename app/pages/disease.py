@@ -36,9 +36,9 @@ st.markdown("""
         color: #555555;
     }
 </style>
-""", unsafe_style_html=True)
+""", unsafe_allow_html=True)
 
-st.markdown("<h1 class='section-title'>🔍 Crop Disease Diagnosis</h1>", unsafe_style_html=True)
+st.markdown("<h1 class='section-title'>🔍 Crop Disease Diagnosis</h1>", unsafe_allow_html=True)
 st.write("Upload a crop leaf image to analyze and classify plant diseases with explainable heatmaps.")
 
 st.write("---")
@@ -56,7 +56,7 @@ with col_left:
         # Display uploaded image
         image_bytes = uploaded_file.read()
         image = Image.open(io.BytesIO(image_bytes))
-        st.image(image, caption="Uploaded Crop Leaf", use_column_width=True)
+        st.image(image, caption="Uploaded Crop Leaf", use_container_width=True)
         
         # Predict Button
         if st.button("Run Diagnosis", type="primary", use_container_width=True):
@@ -94,7 +94,7 @@ with col_right:
                 <div class="metric-label">Predicted Class</div>
                 <div class="metric-value">{pred_class}</div>
             </div>
-            """, unsafe_style_html=True)
+            """, unsafe_allow_html=True)
             
         with col_m2:
             st.markdown(f"""
@@ -102,7 +102,7 @@ with col_right:
                 <div class="metric-label">Confidence</div>
                 <div class="metric-value">{confidence * 100:.1f}%</div>
             </div>
-            """, unsafe_style_html=True)
+            """, unsafe_allow_html=True)
             
         # 2. Uncertainty indicator
         st.write("#### 🛡️ Uncertainty & Reliability")
@@ -127,7 +127,7 @@ with col_right:
             # Decode base64 Grad-CAM overlay
             overlay_data = base64.b64decode(explanation["overlay_base64"])
             overlay_image = Image.open(io.BytesIO(overlay_data))
-            st.image(overlay_image, caption="Grad-CAM Activation Overlay", use_column_width=True)
+            st.image(overlay_image, caption="Grad-CAM Activation Overlay", use_container_width=True)
             
             st.info("**Caution:** This heatmap highlights correlation of activations, not clinical causal proof. Utilize as decision support.")
     else:

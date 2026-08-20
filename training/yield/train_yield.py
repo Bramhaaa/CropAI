@@ -15,7 +15,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 random.seed(42)
 np.random.seed(42)
 
-def train_yield_model(data_dir="data/yield", artifact_dir="artifacts/yield"):
+def train_yield_model(data_dir="data/processed/yield", artifact_dir="artifacts/yield"):
     os.makedirs(artifact_dir, exist_ok=True)
     
     # Load data
@@ -24,8 +24,8 @@ def train_yield_model(data_dir="data/yield", artifact_dir="artifacts/yield"):
     test_df = pd.read_csv(os.path.join(data_dir, "test.csv"))
     
     categorical_cols = ["crop", "season"]
-    numeric_cols = ["rainfall", "temperature", "area"]
-    target_col = "yield"
+    numeric_cols = ["area_hectares"]
+    target_col = "yield_tonnes_per_hectare"
     
     X_train = train_df[categorical_cols + numeric_cols]
     y_train = train_df[target_col].values

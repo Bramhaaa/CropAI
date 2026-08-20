@@ -14,9 +14,7 @@ router = APIRouter()
 class YieldPredictRequest(BaseModel):
     crop: str = Field(..., description="Target crop category (e.g., Rice, Maize)")
     season: str = Field(..., description="Target growing season (e.g., Kharif, Rabi)")
-    rainfall: float = Field(..., ge=0, le=5000, description="Annual/seasonal rainfall (mm)")
-    temperature: float = Field(..., ge=-10, le=60, description="Average temperature (°C)")
-    area: float = Field(..., ge=0.1, le=100.0, description="Cultivated land area (hectares)")
+    area_hectares: float = Field(..., ge=0.1, le=10_000_000, description="Cultivated land area (hectares)")
     confidence_level: float = Field(0.90, ge=0.50, le=0.99, description="Conformal prediction interval confidence")
 
 @router.post("/predict")

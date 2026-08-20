@@ -95,11 +95,17 @@ app.include_router(yield_route.router, prefix="/api/v1/yield", tags=["Yield Pred
 
 @app.get("/health")
 async def health_check():
+    def _check(loader):
+        try:
+            return loader() is not None
+        except Exception:
+            return False
+
     return {
         "status": "ok",
         "models_loaded": {
-            "disease": get_disease_service() is not None,
-            "crop": get_crop_service() is not None,
-            "yield": get_yield_service() is not None
+            "disease": _check(get_disease_service),
+            "crop": _check(get_crop_service),
+            "yield": _check(get_yield_service),
         }
     }

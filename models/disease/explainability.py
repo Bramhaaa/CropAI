@@ -26,6 +26,9 @@ class GradCAM:
         self.backward_hook.remove()
 
     def generate_heatmap(self, input_tensor, class_idx):
+        # Determine device from model parameters
+        device = next(self.model.parameters()).device
+        input_tensor = input_tensor.to(device)
         self.model.zero_grad()
         output = self.model(input_tensor)
         

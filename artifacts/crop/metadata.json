@@ -3,9 +3,9 @@
     "model_version": "crop_v2",
     "dataset": "Kaggle Crop Recommendation Dataset",
     "dataset_hash": "311c6ca90a191cd5d0cf92e875b703cc49d65de213286911c67629a33cb0e031",
-    "git_sha": "827305f415b274464db4ab75a1308b6513895751",
-    "trained_at": "2026-08-21 00:15:22",
-    "training_duration_seconds": 2.44,
+    "git_sha": "04cdebbbf44cbe6a4d85a2b4d406e8ad12791096",
+    "trained_at": "2026-08-21 00:38:26",
+    "training_duration_seconds": 1.55,
     "random_seed": 42,
     "features": [
         "nitrogen",

@@ -54,7 +54,7 @@ st.markdown("""
         margin-bottom: 0.5rem;
     }
 </style>
-""", unsafe_style_html=True)
+""", unsafe_allow_html=True)
 
 # Sidebar
 st.sidebar.image("https://img.icons8.com/color/96/sprout.png", width=60)
@@ -62,8 +62,8 @@ st.sidebar.title("CropAI Navigation")
 st.sidebar.info("Select a workflow from the sidebar or from the landing cards to start diagnosis, crop recommendation, or yield estimation.")
 
 # Main layout
-st.markdown("<h1 class='main-title'>🌱 CropAI</h1>", unsafe_style_html=True)
-st.markdown("<p class='subtitle'>Explainable, Uncertainty-Aware Agricultural Decision Support System</p>", unsafe_style_html=True)
+st.markdown("<h1 class='main-title'>🌱 CropAI</h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>Explainable, Uncertainty-Aware Agricultural Decision Support System</p>", unsafe_allow_html=True)
 
 st.write("---")
 
@@ -75,7 +75,7 @@ with col1:
         <div class="card-title">🔍 Disease Diagnosis</div>
         <p>Upload crop leaf images to instantly identify plant pathogens. The system provides prediction confidence, MC Dropout uncertainty, and Grad-CAM visual heatmaps showing the affected leaf lesions.</p>
     </div>
-    """, unsafe_style_html=True)
+    """, unsafe_allow_html=True)
     if st.button("Go to Disease Diagnosis", key="btn_disease", type="primary"):
         st.switch_page("pages/disease.py")
 
@@ -85,7 +85,7 @@ with col2:
         <div class="card-title">🚜 Crop Recommendation</div>
         <p>Enter soil parameters (N, P, K, pH) and environmental inputs (rainfall, temp, humidity) to receive calibrated crop recommendations. Visualizes feature importance using local SHAP contribution charts.</p>
     </div>
-    """, unsafe_style_html=True)
+    """, unsafe_allow_html=True)
     if st.button("Go to Crop Recommendation", key="btn_crop", type="primary"):
         st.switch_page("pages/crop.py")
 
@@ -95,7 +95,7 @@ with col3:
         <div class="card-title">📈 Yield Prediction</div>
         <p>Predict expected crop yields using agricultural inputs (crop, season, rainfall, temperature, area). Features conformal prediction intervals for statistical reliability bounds and SHAP explanations.</p>
     </div>
-    """, unsafe_style_html=True)
+    """, unsafe_allow_html=True)
     if st.button("Go to Yield Prediction", key="btn_yield", type="primary"):
         st.switch_page("pages/yield.py")
 
