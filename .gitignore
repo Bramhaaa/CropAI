@@ -22,3 +22,7 @@ api_server.log
 
 # Streamlit config
 .streamlit/
+
+# User-provided and generated datasets are reproducible from the preparation script.
+data/raw
+data/processed

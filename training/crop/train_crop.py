@@ -3,6 +3,9 @@ import json
 import time
 import random
 import pickle
+import hashlib
+import subprocess
+from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
@@ -44,7 +47,25 @@ def calculate_top_k_accuracy(probs, labels, k=3):
             correct += 1
     return float(correct / len(labels))
 
-def train_crop_model(data_dir="data/crop", artifact_dir="artifacts/crop"):
+FEATURE_COLUMNS = ["nitrogen", "phosphorus", "potassium", "temperature", "humidity", "ph", "rainfall"]
+TARGET_COLUMN = "label"
+
+
+def dataset_hash(data_dir: str) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(Path(data_dir).glob("*.csv")):
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
+def git_sha() -> str | None:
+    try:
+        return subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+
+def train_crop_model(data_dir="data/processed/recommendation", artifact_dir="artifacts/crop"):
     os.makedirs(artifact_dir, exist_ok=True)
     
     # Load data
@@ -52,17 +73,18 @@ def train_crop_model(data_dir="data/crop", artifact_dir="artifacts/crop"):
     val_df = pd.read_csv(os.path.join(data_dir, "val.csv"))
     test_df = pd.read_csv(os.path.join(data_dir, "test.csv"))
     
-    feature_cols = ["nitrogen", "phosphorus", "potassium", "temperature", "humidity", "ph", "rainfall"]
-    target_col = "crop"
+    missing_columns = set(FEATURE_COLUMNS + [TARGET_COLUMN]) - set(train_df.columns)
+    if missing_columns:
+        raise ValueError(f"Training data is missing columns: {sorted(missing_columns)}")
+
+    X_train = train_df[FEATURE_COLUMNS].values
+    y_train = train_df[TARGET_COLUMN].values
     
-    X_train = train_df[feature_cols].values
-    y_train = train_df[target_col].values
+    X_val = val_df[FEATURE_COLUMNS].values
+    y_val = val_df[TARGET_COLUMN].values
     
-    X_val = val_df[feature_cols].values
-    y_val = val_df[target_col].values
-    
-    X_test = test_df[feature_cols].values
-    y_test = test_df[target_col].values
+    X_test = test_df[FEATURE_COLUMNS].values
+    y_test = test_df[TARGET_COLUMN].values
     
     # Label Encoder
     le = LabelEncoder()
@@ -78,8 +100,10 @@ def train_crop_model(data_dir="data/crop", artifact_dir="artifacts/crop"):
     
     # Base Random Forest model
     base_model = RandomForestClassifier(
-        n_estimators=100,
-        max_depth=6,
+        n_estimators=500,
+        min_samples_leaf=1,
+        class_weight="balanced",
+        n_jobs=-1,
         random_state=42
     )
     
@@ -87,10 +111,11 @@ def train_crop_model(data_dir="data/crop", artifact_dir="artifacts/crop"):
     base_model.fit(X_train_scaled, y_train_encoded)
     
     # Calibrated Classifier
-    # We calibrate the base model predictions on the validation set using Isotonic regression
+    # Sigmoid calibration is more stable than isotonic calibration for the 15
+    # held-out samples available per class in this dataset.
     calibrated_model = CalibratedClassifierCV(
         estimator=FrozenEstimator(base_model),
-        method="isotonic"
+        method="sigmoid"
     )
     calibrated_model.fit(X_val_scaled, y_val_encoded)
     training_duration = time.time() - start_time
@@ -122,12 +147,14 @@ def train_crop_model(data_dir="data/crop", artifact_dir="artifacts/crop"):
         
     metadata = {
         "model_name": "random_forest_calibrated",
-        "model_version": "crop_v1",
-        "dataset": "CropAI Soil & Environment Tabular Dataset",
+        "model_version": "crop_v2",
+        "dataset": "Kaggle Crop Recommendation Dataset",
+        "dataset_hash": dataset_hash(data_dir),
+        "git_sha": git_sha(),
         "trained_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         "training_duration_seconds": round(training_duration, 2),
         "random_seed": 42,
-        "features": feature_cols,
+        "features": FEATURE_COLUMNS,
         "metrics": {
             "test_accuracy": float(acc),
             "macro_precision": float(precision),
