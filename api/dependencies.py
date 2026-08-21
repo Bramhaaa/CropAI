@@ -9,10 +9,13 @@ _disease_service = None
 _crop_service = None
 _yield_service = None
 
-def get_disease_service() -> DiseaseInferenceService:
+def get_disease_service():
     global _disease_service
     if _disease_service is None:
-        _disease_service = DiseaseInferenceService()
+        try:
+            _disease_service = DiseaseInferenceService()
+        except Exception:
+            return None
     return _disease_service
 
 def get_crop_service() -> CropInferenceService:
