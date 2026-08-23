@@ -1,0 +1,143 @@
+2026-08-22 12:27:34,322 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:27:34,618 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:36:05,759 [INFO] POST /api/v1/disease/predict status=200 latency=0.6582s model=disease_v1
+2026-08-22 12:40:04,583 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:40:07,588 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:40:07,834 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:40:10,059 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:40:12,659 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:40:12,876 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:40:13,886 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:40:16,450 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:40:16,690 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:40:18,509 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:40:21,100 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:40:21,327 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:45:06,472 [INFO] POST /api/v1/yield/predict status=200 latency=0.0944s model=yield_v1
+2026-08-22 12:45:27,297 [INFO] POST /api/v1/yield/predict status=200 latency=0.0546s model=yield_v1
+2026-08-22 12:47:27,970 [INFO] POST /api/v1/crop/recommend status=200 latency=0.0796s model=crop_v1
+2026-08-22 12:54:11,196 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:54:14,585 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:54:14,836 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:54:22,010 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:54:24,894 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:54:25,138 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:54:34,339 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:54:37,281 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:54:37,529 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:54:44,401 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:54:46,982 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:54:47,200 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:54:58,116 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:55:00,675 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:55:00,905 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:55:20,309 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:55:23,264 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:55:23,514 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:55:25,737 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:55:28,303 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:55:28,527 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:55:40,249 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:55:42,868 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:55:43,128 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 12:55:47,172 [INFO] Lifespan shutdown: Cleaning up serving services.
+2026-08-22 12:55:49,775 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-08-22 12:55:49,992 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-08-22 13:14:18,318 [INFO] GET /health status=200 latency=0.0010s model=unknown
+2026-08-22 13:15:23,151 [INFO] GET /health status=200 latency=0.0032s model=unknown
+2026-08-22 13:15:38,143 [INFO] GET /health status=200 latency=0.0003s model=unknown
+2026-08-22 13:15:53,157 [INFO] GET /health status=200 latency=0.0007s model=unknown
+2026-08-22 15:15:58,051 [INFO] GET /health status=200 latency=0.0010s model=unknown
+2026-08-22 15:16:13,035 [INFO] GET /health status=200 latency=0.0007s model=unknown
+2026-08-22 15:16:28,045 [INFO] GET /health status=200 latency=0.0024s model=unknown
+2026-08-22 15:16:43,046 [INFO] GET /health status=200 latency=0.0011s model=unknown
+2026-08-22 15:16:58,042 [INFO] GET /health status=200 latency=0.0003s model=unknown
+2026-08-22 15:17:13,054 [INFO] GET /health status=200 latency=0.0010s model=unknown
+2026-08-22 15:17:28,051 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:17:43,058 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:17:58,135 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:18:14,058 [INFO] GET /health status=200 latency=0.0003s model=unknown
+2026-08-22 15:18:42,340 [INFO] GET /health status=200 latency=0.0015s model=unknown
+2026-08-22 15:19:27,961 [INFO] GET /health status=200 latency=0.0005s model=unknown
+2026-08-22 15:19:42,967 [INFO] GET /health status=200 latency=0.0008s model=unknown
+2026-08-22 15:19:58,070 [INFO] GET /health status=200 latency=0.0003s model=unknown
+2026-08-22 15:20:13,177 [INFO] GET /health status=200 latency=0.0006s model=unknown
+2026-08-22 15:20:36,757 [INFO] GET /health status=200 latency=0.0010s model=unknown
+2026-08-22 15:21:17,105 [INFO] GET /health status=200 latency=0.0003s model=unknown
+2026-08-22 15:21:32,107 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:21:47,202 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:22:02,361 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:22:17,362 [INFO] GET /health status=200 latency=0.0003s model=unknown
+2026-08-22 15:22:32,459 [INFO] GET /health status=200 latency=0.0004s model=unknown
+2026-08-22 15:22:49,623 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:23:20,753 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:23:52,060 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:24:19,107 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:25:27,784 [INFO] GET /health status=200 latency=0.0003s model=unknown
+2026-08-22 15:26:29,279 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:26:44,382 [INFO] GET /health status=200 latency=0.0006s model=unknown
+2026-08-22 15:27:06,554 [INFO] GET /health status=200 latency=0.0010s model=unknown
+2026-08-22 15:27:46,410 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:28:01,692 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:29:11,745 [INFO] GET /health status=200 latency=0.0003s model=unknown
+2026-08-22 15:29:56,206 [INFO] GET /health status=200 latency=0.0007s model=unknown
+2026-08-22 15:30:11,308 [INFO] GET /health status=200 latency=0.0007s model=unknown
+2026-08-22 15:30:28,354 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:30:50,415 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:31:15,855 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:31:30,864 [INFO] GET /health status=200 latency=0.0006s model=unknown
+2026-08-22 15:31:45,864 [INFO] GET /health status=200 latency=0.0011s model=unknown
+2026-08-22 15:32:01,871 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:32:22,988 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:32:42,204 [INFO] GET /health status=200 latency=0.0019s model=unknown
+2026-08-22 15:32:57,308 [INFO] GET /health status=200 latency=0.0007s model=unknown
+2026-08-22 15:33:12,369 [INFO] GET /health status=200 latency=0.0020s model=unknown
+2026-08-22 15:33:27,613 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:33:42,712 [INFO] GET /health status=200 latency=0.0007s model=unknown
+2026-08-22 15:33:57,942 [INFO] GET /health status=200 latency=0.0007s model=unknown
+2026-08-22 15:34:26,876 [INFO] GET /health status=200 latency=0.0006s model=unknown
+2026-08-22 15:35:05,683 [INFO] GET /health status=200 latency=0.0006s model=unknown
+2026-08-22 15:35:41,825 [INFO] GET /health status=200 latency=0.0007s model=unknown
+2026-08-22 15:35:56,821 [INFO] GET /health status=200 latency=0.0006s model=unknown
+2026-08-22 15:36:11,915 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:36:34,150 [INFO] GET /health status=200 latency=0.0002s model=unknown
+2026-08-22 15:37:08,432 [INFO] GET /health status=200 latency=0.0027s model=unknown
+2026-08-22 15:46:14,817 [INFO] POST /api/v1/disease/predict status=200 latency=0.8397s model=disease_v1
+2026-08-22 15:47:47,650 [INFO] POST /api/v1/disease/predict status=200 latency=0.1616s model=disease_v1
+2026-08-22 15:47:58,333 [INFO] POST /api/v1/disease/predict status=200 latency=0.1371s model=disease_v1
+2026-08-22 15:48:05,246 [INFO] POST /api/v1/disease/predict status=200 latency=0.1616s model=disease_v1
+2026-08-22 15:48:11,693 [INFO] POST /api/v1/disease/predict status=200 latency=0.1437s model=disease_v1
+2026-08-22 15:48:21,942 [INFO] OPTIONS /api/v1/crop/recommend status=200 latency=0.0001s model=crop_v1
+2026-08-22 15:48:22,097 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1531s model=crop_v1
+2026-08-22 15:48:35,442 [INFO] OPTIONS /api/v1/yield/predict status=200 latency=0.0002s model=yield_v1
+2026-08-22 15:48:35,590 [INFO] POST /api/v1/yield/predict status=200 latency=0.1445s model=yield_v1
+2026-08-22 15:55:48,486 [INFO] POST /api/v1/disease/predict status=200 latency=0.1392s model=disease_v1
+2026-08-22 15:57:38,719 [INFO] POST /api/v1/disease/predict status=200 latency=0.1089s model=disease_v1
+2026-08-22 15:57:54,274 [INFO] POST /api/v1/crop/recommend status=200 latency=0.0650s model=crop_v1
+2026-08-22 16:00:27,569 [INFO] OPTIONS /api/v1/crop/recommend status=200 latency=0.0010s model=crop_v1
+2026-08-22 16:00:27,655 [INFO] POST /api/v1/crop/recommend status=200 latency=0.0803s model=crop_v1
+2026-08-22 16:00:48,585 [INFO] POST /api/v1/disease/predict status=200 latency=0.2072s model=disease_v1
+2026-08-22 16:03:39,642 [INFO] OPTIONS /api/v1/yield/predict status=200 latency=0.0003s model=yield_v1
+2026-08-22 16:03:39,711 [INFO] POST /api/v1/yield/predict status=200 latency=0.0673s model=yield_v1
+2026-08-22 16:04:00,103 [INFO] POST /api/v1/disease/predict status=200 latency=0.1764s model=disease_v1
+2026-08-22 16:13:58,269 [INFO] OPTIONS /api/v1/yield/predict status=200 latency=0.0007s model=yield_v1
+2026-08-22 16:13:58,359 [INFO] POST /api/v1/yield/predict status=200 latency=0.0876s model=yield_v1
+2026-08-22 16:15:04,165 [INFO] POST /api/v1/disease/predict status=200 latency=0.1434s model=disease_v1
+2026-08-22 16:15:20,454 [INFO] OPTIONS /api/v1/crop/recommend status=200 latency=0.0002s model=crop_v1
+2026-08-22 16:15:20,524 [INFO] POST /api/v1/crop/recommend status=200 latency=0.0666s model=crop_v1
+2026-08-22 16:16:02,047 [INFO] POST /api/v1/crop/recommend status=200 latency=0.0470s model=crop_v1
+2026-08-22 16:16:09,190 [INFO] POST /api/v1/crop/recommend status=200 latency=0.0417s model=crop_v1
+2026-08-22 16:16:13,525 [INFO] POST /api/v1/crop/recommend status=200 latency=0.0736s model=crop_v1
+2026-08-22 16:16:17,037 [INFO] POST /api/v1/crop/recommend status=200 latency=0.0397s model=crop_v1
+2026-08-22 16:16:45,424 [INFO] POST /api/v1/yield/predict status=200 latency=0.0857s model=yield_v1
+2026-08-22 16:17:23,246 [INFO] POST /api/v1/yield/predict status=200 latency=0.0498s model=yield_v1
+2026-08-22 16:17:29,815 [INFO] POST /api/v1/yield/predict status=200 latency=0.0498s model=yield_v1
+2026-08-22 16:17:47,196 [INFO] POST /api/v1/yield/predict status=200 latency=0.0495s model=yield_v1
+2026-08-22 16:17:55,762 [INFO] POST /api/v1/yield/predict status=200 latency=0.0481s model=yield_v1
+2026-08-22 16:18:00,434 [INFO] POST /api/v1/yield/predict status=200 latency=0.0841s model=yield_v1
+2026-08-22 16:18:02,263 [INFO] POST /api/v1/yield/predict status=200 latency=0.0484s model=yield_v1
+2026-08-22 16:18:11,065 [INFO] POST /api/v1/yield/predict status=200 latency=0.0488s model=yield_v1
+2026-08-22 16:35:46,571 [INFO] POST /api/v1/disease/predict status=200 latency=0.2396s model=disease_v1
+2026-08-23 13:54:30,913 [INFO] POST /api/v1/disease/predict status=200 latency=0.3262s model=disease_v1
+2026-08-23 13:56:49,210 [INFO] OPTIONS /api/v1/crop/recommend status=200 latency=0.0007s model=crop_v1
+2026-08-23 13:56:49,344 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1315s model=crop_v1

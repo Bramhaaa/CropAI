@@ -1,0 +1,19 @@
+# Datasets & raw images
+data/
+
+# Python virtual environments & bytecode
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node modules & build artifacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.DS_Store
+
+# Testing & caches
+.pytest_cache/
+.coverage
+htmlcov/

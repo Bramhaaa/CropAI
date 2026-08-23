@@ -1,0 +1,25 @@
+{
+    "model_name": "random_forest_regressor_log_transformed",
+    "model_version": "yield_v2",
+    "dataset": "CropAI Agricultural Yield Tabular Dataset",
+    "trained_at": "2026-08-22 11:59:20",
+    "training_duration_seconds": 66.34,
+    "random_seed": 42,
+    "features": {
+        "categorical": [
+            "state",
+            "crop",
+            "season"
+        ],
+        "numeric": [
+            "area_hectares"
+        ]
+    },
+    "metrics": {
+        "mae": 1.1416586552054637,
+        "rmse": 2.9893760781378402,
+        "r2": 0.9468893181749212,
+        "conformal_90_coverage": 0.948306595365419,
+        "conformal_90_interval_width": 7.405919674146379
+    }
+}

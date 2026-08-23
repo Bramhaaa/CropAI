@@ -1,0 +1,7 @@
+# Temporary and generated files for agent memory workflows
+memory/tmp/
+*.bak
+*.tmp
+*.swp
+*.swo
+*.DS_Store
