@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 from __future__ import annotations
->>>>>>> origin/bhavya-feature
 import os
 import json
 import time
@@ -84,13 +81,8 @@ def git_sha():
 def train_model(
     manifest_dir="data/processed/disease",
     artifact_dir="artifacts/disease",
-<<<<<<< HEAD
-    epochs=10,
-    batch_size=32,
-=======
     epochs=5,
     batch_size=64,
->>>>>>> origin/bhavya-feature
 ):
     os.makedirs(artifact_dir, exist_ok=True)
 
@@ -138,11 +130,6 @@ def train_model(
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=0)
 
     num_classes = len(classes)
-<<<<<<< HEAD
-    print(f"Training on {len(train_ds)} images, {num_classes} classes, device: {'cuda' if torch.cuda.is_available() else 'cpu'}")
-
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-=======
     if torch.cuda.is_available():
         device = torch.device("cuda:0")
     elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
@@ -152,7 +139,6 @@ def train_model(
         
     print(f"Training on {len(train_ds)} images, {num_classes} classes, device: {device}")
 
->>>>>>> origin/bhavya-feature
     model = models.mobilenet_v3_small(weights=models.MobileNet_V3_Small_Weights.IMAGENET1K_V1)
     in_features = model.classifier[3].in_features
     model.classifier[3] = nn.Linear(in_features, num_classes)
@@ -163,17 +149,10 @@ def train_model(
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
     start_time = time.time()
-<<<<<<< HEAD
-    best_val_acc = 0.0
-
-    for epoch in range(epochs):
-        print(f"\nEpoch {epoch + 1}/{epochs}")
-=======
     best_val_acc = -1.0
 
     for epoch in range(epochs):
         print(f"\nEpoch {epoch + 1}/{epochs}", flush=True)
->>>>>>> origin/bhavya-feature
 
         model.train()
         running_loss, running_corrects = 0.0, 0
@@ -188,13 +167,8 @@ def train_model(
             running_loss += loss.item() * inputs.size(0)
             running_corrects += torch.sum(preds == labels.data)
 
-<<<<<<< HEAD
-        train_acc = running_corrects.double() / len(train_ds)
-        print(f"  train Loss: {running_loss / len(train_ds):.4f}  Acc: {train_acc:.4f}")
-=======
         train_acc = running_corrects.item() / len(train_ds)
         print(f"  train Loss: {running_loss / len(train_ds):.4f}  Acc: {train_acc:.4f}", flush=True)
->>>>>>> origin/bhavya-feature
 
         model.eval()
         val_corrects = 0
@@ -205,15 +179,6 @@ def train_model(
                 _, preds = torch.max(outputs, 1)
                 val_corrects += torch.sum(preds == labels.data)
 
-<<<<<<< HEAD
-        val_acc = val_corrects.double() / len(val_ds)
-        print(f"  val   Acc: {val_acc:.4f}")
-
-        if val_acc > best_val_acc:
-            best_val_acc = val_acc
-            torch.save(model.state_dict(), os.path.join(artifact_dir, "model.pt"))
-            print("  checkpoint saved.")
-=======
         val_acc = val_corrects.item() / len(val_ds)
         print(f"  val   Acc: {val_acc:.4f}", flush=True)
 
@@ -221,7 +186,6 @@ def train_model(
             best_val_acc = val_acc
             torch.save(model.state_dict(), os.path.join(artifact_dir, "model.pt"))
             print("  checkpoint saved.", flush=True)
->>>>>>> origin/bhavya-feature
 
         scheduler.step()
 
