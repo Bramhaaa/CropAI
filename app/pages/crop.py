@@ -1,8 +1,21 @@
 import os
+<<<<<<< HEAD
+=======
+import sys
+from pathlib import Path
+>>>>>>> origin/bhavya-feature
 import requests
 import streamlit as st
 import matplotlib.pyplot as plt
 
+<<<<<<< HEAD
+=======
+# Add repository root to sys.path
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+>>>>>>> origin/bhavya-feature
 from models.crop.explainability import generate_shap_bar_plot
 
 # Config
@@ -12,6 +25,7 @@ st.set_page_config(page_title="Crop Recommendation — CropAI", page_icon="🌱"
 
 st.markdown("""
 <style>
+<<<<<<< HEAD
     .section-title {
         color: #2E7D32;
         font-weight: 700;
@@ -23,16 +37,47 @@ st.markdown("""
         padding: 1rem;
         border-radius: 8px;
         border: 1px solid #c5e1a5;
+=======
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    .section-title {
+        font-weight: 700;
+        font-size: 2rem;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.25rem;
+    }
+    .metric-card {
+        background-color: var(--secondary-background-color);
+        border: 1px solid rgba(128, 128, 128, 0.18);
+        padding: 1.25rem;
+        border-radius: 12px;
+>>>>>>> origin/bhavya-feature
         margin-bottom: 1rem;
     }
     .metric-value {
         font-size: 1.8rem;
         font-weight: 700;
+<<<<<<< HEAD
         color: #2E7D32;
     }
     .metric-label {
         font-size: 0.9rem;
         color: #555555;
+=======
+        letter-spacing: -0.02em;
+        color: #10b981;
+    }
+    .metric-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.65;
+        font-weight: 500;
+>>>>>>> origin/bhavya-feature
     }
 </style>
 """, unsafe_allow_html=True)
@@ -91,7 +136,11 @@ with col_right:
         col_m1, col_m2 = st.columns(2)
         with col_m1:
             st.markdown(f"""
+<<<<<<< HEAD
             <div class="metric-container">
+=======
+            <div class="metric-card">
+>>>>>>> origin/bhavya-feature
                 <div class="metric-label">Recommended Crop</div>
                 <div class="metric-value">{crop}</div>
             </div>
@@ -99,7 +148,11 @@ with col_right:
             
         with col_m2:
             st.markdown(f"""
+<<<<<<< HEAD
             <div class="metric-container">
+=======
+            <div class="metric-card">
+>>>>>>> origin/bhavya-feature
                 <div class="metric-label">Calibrated Probability</div>
                 <div class="metric-value">{conf * 100:.1f}%</div>
             </div>

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "model_name": "random_forest_regressor",
     "model_version": "yield_v1",
     "dataset": "CropAI Agricultural Yield Tabular Dataset",
@@ -7,6 +8,17 @@
     "random_seed": 42,
     "features": {
         "categorical": [
+=======
+    "model_name": "random_forest_regressor_log_transformed",
+    "model_version": "yield_v2",
+    "dataset": "CropAI Agricultural Yield Tabular Dataset",
+    "trained_at": "2026-08-22 11:59:20",
+    "training_duration_seconds": 66.34,
+    "random_seed": 42,
+    "features": {
+        "categorical": [
+            "state",
+>>>>>>> origin/bhavya-feature
             "crop",
             "season"
         ],
@@ -15,10 +27,18 @@
         ]
     },
     "metrics": {
+<<<<<<< HEAD
         "mae": 5.027256870181326,
         "rmse": 41.85020386515191,
         "r2": -9.409165724097024,
         "conformal_90_coverage": 0.9607843137254902,
         "conformal_90_interval_width": 14.12260872556206
+=======
+        "mae": 1.1416586552054637,
+        "rmse": 2.9893760781378402,
+        "r2": 0.9468893181749212,
+        "conformal_90_coverage": 0.948306595365419,
+        "conformal_90_interval_width": 7.405919674146379
+>>>>>>> origin/bhavya-feature
     }
 }

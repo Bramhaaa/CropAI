@@ -12,6 +12,10 @@ YieldExplainer = yield_exp_mod.YieldExplainer
 router = APIRouter()
 
 class YieldPredictRequest(BaseModel):
+<<<<<<< HEAD
+=======
+    state: str = Field("Punjab", description="Target state (e.g., Punjab, Maharashtra, Uttar Pradesh)")
+>>>>>>> origin/bhavya-feature
     crop: str = Field(..., description="Target crop category (e.g., Rice, Maize)")
     season: str = Field(..., description="Target growing season (e.g., Kharif, Rabi)")
     area_hectares: float = Field(..., ge=0.1, le=10_000_000, description="Cultivated land area (hectares)")

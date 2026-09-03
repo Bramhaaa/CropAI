@@ -58,6 +58,10 @@ def test_crop_recommendation_missing_param():
 
 def test_yield_prediction_valid():
     payload = {
+<<<<<<< HEAD
+=======
+        "state": "Punjab",
+>>>>>>> origin/bhavya-feature
         "crop": "Rice",
         "season": "Kharif     ",
         "area_hectares": 2.5,

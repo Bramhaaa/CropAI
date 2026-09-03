@@ -28,7 +28,16 @@ class DiseaseInferenceService:
             self.pre_config = json.load(f)
 
         num_classes = len(self.class_mapping)
+<<<<<<< HEAD
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+=======
+        if torch.cuda.is_available():
+            self.device = torch.device("cuda:0")
+        elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        else:
+            self.device = torch.device("cpu")
+>>>>>>> origin/bhavya-feature
 
         # Build the exact same architecture used in training
         self.model = models.mobilenet_v3_small(weights=None)

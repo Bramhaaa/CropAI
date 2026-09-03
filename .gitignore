@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Environments
 venv/
 ENV/
@@ -24,3 +25,24 @@ api_server.log
 .streamlit/
 
 # User-provided and generated datasets are reproducible from the preparation script
+=======
+# Datasets & raw images
+data/
+
+# Python virtual environments & bytecode
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node modules & build artifacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.DS_Store
+
+# Testing & caches
+.pytest_cache/
+.coverage
+htmlcov/
+>>>>>>> origin/bhavya-feature
