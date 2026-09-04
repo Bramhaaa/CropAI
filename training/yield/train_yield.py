@@ -23,11 +23,7 @@ def train_yield_model(data_dir="data/processed/yield", artifact_dir="artifacts/y
     val_df = pd.read_csv(os.path.join(data_dir, "val.csv"))
     test_df = pd.read_csv(os.path.join(data_dir, "test.csv"))
     
-<<<<<<< HEAD
-    categorical_cols = ["crop", "season"]
-=======
     categorical_cols = ["state", "crop", "season"]
->>>>>>> origin/bhavya-feature
     numeric_cols = ["area_hectares"]
     target_col = "yield_tonnes_per_hectare"
     
@@ -48,27 +44,6 @@ def train_yield_model(data_dir="data/processed/yield", artifact_dir="artifacts/y
         ]
     )
     
-<<<<<<< HEAD
-    # Pipeline
-    pipeline = Pipeline(
-        steps=[
-            ("preprocessor", preprocessor),
-            ("regressor", RandomForestRegressor(n_estimators=100, max_depth=6, random_state=42))
-        ]
-    )
-    
-    # Train
-    start_time = time.time()
-    pipeline.fit(X_train, y_train)
-    training_duration = time.time() - start_time
-    
-    # Predict on validation set to compute conformal residuals
-    val_preds = pipeline.predict(X_val)
-    conformal_residuals = np.abs(y_val - val_preds)
-    
-    # Predict on test set
-    test_preds = pipeline.predict(X_test)
-=======
     # Pipeline with log-transformed target
     pipeline = Pipeline(
         steps=[
@@ -90,7 +65,6 @@ def train_yield_model(data_dir="data/processed/yield", artifact_dir="artifacts/y
     # Predict on test set
     test_preds_log = pipeline.predict(X_test)
     test_preds = np.expm1(test_preds_log)
->>>>>>> origin/bhavya-feature
     
     # Calculate metrics
     mae = mean_absolute_error(y_test, test_preds)
@@ -104,11 +78,7 @@ def train_yield_model(data_dir="data/processed/yield", artifact_dir="artifacts/y
     q_index = max(0, min(q_index, n_val - 1))
     q_hat = np.sort(conformal_residuals)[q_index]
     
-<<<<<<< HEAD
-    test_intervals_lower = test_preds - q_hat
-=======
     test_intervals_lower = np.maximum(0.0, test_preds - q_hat)
->>>>>>> origin/bhavya-feature
     test_intervals_upper = test_preds + q_hat
     coverage = np.mean((y_test >= test_intervals_lower) & (y_test <= test_intervals_upper))
     mean_width = 2 * q_hat
@@ -125,13 +95,8 @@ def train_yield_model(data_dir="data/processed/yield", artifact_dir="artifacts/y
         pickle.dump(conformal_residuals, f)
         
     metadata = {
-<<<<<<< HEAD
-        "model_name": "random_forest_regressor",
-        "model_version": "yield_v1",
-=======
         "model_name": "random_forest_regressor_log_transformed",
         "model_version": "yield_v2",
->>>>>>> origin/bhavya-feature
         "dataset": "CropAI Agricultural Yield Tabular Dataset",
         "trained_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         "training_duration_seconds": round(training_duration, 2),
@@ -156,7 +121,3 @@ def train_yield_model(data_dir="data/processed/yield", artifact_dir="artifacts/y
 
 if __name__ == "__main__":
     train_yield_model()
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/bhavya-feature

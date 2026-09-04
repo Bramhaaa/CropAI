@@ -19,24 +19,11 @@ class YieldInferenceService:
         with open(self.residuals_path, "rb") as f:
             self.conformal_residuals = pickle.load(f)
             
-<<<<<<< HEAD
-        self.categorical_cols = ["crop", "season"]
-=======
         self.categorical_cols = ["state", "crop", "season"]
->>>>>>> origin/bhavya-feature
         self.numeric_cols = ["area_hectares"]
 
     def predict(self, input_data: dict, confidence_level: float = 0.90):
         """
-<<<<<<< HEAD
-        Input: dict with keys: crop, season, area_hectares.
-        """
-        # Convert to DataFrame
-        df = pd.DataFrame([input_data])
-        
-        # Make base prediction
-        pred = float(self.model.predict(df)[0])
-=======
         Input: dict with keys: state (optional, defaults to Punjab), crop, season, area_hectares.
         """
         # Ensure state is present
@@ -50,7 +37,6 @@ class YieldInferenceService:
         # Make base prediction on log scale and expm1 back to original scale
         pred_log = float(self.model.predict(df)[0])
         pred = float(np.expm1(pred_log))
->>>>>>> origin/bhavya-feature
         
         # Calculate conformal interval
         alpha = 1.0 - confidence_level
@@ -72,11 +58,6 @@ class YieldInferenceService:
                 "confidence_level": confidence_level,
                 "interval_width": float(q_hat * 2)
             },
-<<<<<<< HEAD
-            "features": input_data,
-            "model_version": "yield_v1"
-=======
             "features": data,
             "model_version": "yield_v2"
->>>>>>> origin/bhavya-feature
         }

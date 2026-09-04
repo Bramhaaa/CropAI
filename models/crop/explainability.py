@@ -8,16 +8,11 @@ class CropExplainer:
     def __init__(self, model_service):
         self.model_service = model_service
         # Get base estimator from the FrozenEstimator wrapped inside calibrated classifier
-<<<<<<< HEAD
-        frozen_estimator = self.model_service.model.calibrated_classifiers_[0].estimator
-        self.base_model = frozen_estimator.estimator
-=======
         try:
             frozen_estimator = self.model_service.model.calibrated_classifiers_[0].estimator
             self.base_model = getattr(frozen_estimator, "estimator", frozen_estimator)
         except Exception:
             self.base_model = self.model_service.model
->>>>>>> origin/bhavya-feature
         self.feature_names = self.model_service.feature_names
         
         # Instantiate TreeExplainer
@@ -72,35 +67,12 @@ class CropExplainer:
 def generate_shap_bar_plot(contributions, predicted_crop):
     """
     Creates a Matplotlib horizontal bar chart of the SHAP feature contributions.
-<<<<<<< HEAD
-    Returns: matplotlib Figure.
-    """
-    # Sort contributions by raw SHAP value so they display logically
-=======
     Returns: matplotlib Figure with transparent background.
     """
->>>>>>> origin/bhavya-feature
     sorted_contribs = sorted(contributions, key=lambda x: x["shap_value"])
     
     features = [c["feature"] for c in sorted_contribs]
     shap_vals = [c["shap_value"] for c in sorted_contribs]
-<<<<<<< HEAD
-    colors = ['#2ca02c' if v >= 0 else '#d62728' for v in shap_vals] # Green for positive, red for negative
-    
-    fig, ax = plt.subplots(figsize=(6, 4))
-    bars = ax.barh(features, shap_vals, color=colors, edgecolor='none', height=0.6)
-    
-    # Customize plot styling (rich premium look)
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['left'].set_color('#cccccc')
-    ax.spines['bottom'].set_color('#cccccc')
-    ax.tick_params(colors='#666666')
-    ax.axvline(0, color='#cccccc', linewidth=0.8, linestyle='--')
-    
-    plt.title(f"Feature Contribution for: {predicted_crop}", fontsize=11, fontweight='bold', pad=15, color='#333333')
-    plt.xlabel("SHAP Value (Impact on prediction)", fontsize=9, color='#666666')
-=======
     colors = ['#10b981' if v >= 0 else '#ef4444' for v in shap_vals]
     
     fig, ax = plt.subplots(figsize=(6, 3.5))
@@ -118,7 +90,6 @@ def generate_shap_bar_plot(contributions, predicted_crop):
     
     plt.title(f"Feature Impact: {predicted_crop}", fontsize=10, pad=12, color='#888888')
     plt.xlabel("SHAP Value (Impact)", fontsize=8, color='#888888')
->>>>>>> origin/bhavya-feature
     plt.tight_layout()
     
     return fig

@@ -1,23 +1,4 @@
 {
-<<<<<<< HEAD
-    "model_name": "mobilenet_v3_small",
-    "model_version": "disease_v1",
-    "dataset": "CropAI Synthetic Plant Pathology Image Dataset",
-    "trained_at": "2026-08-20 16:06:20",
-    "training_duration_seconds": 44.3,
-    "random_seed": 42,
-    "metrics": {
-        "test_accuracy": 0.3333333333333333,
-        "macro_precision": 0.1111111111111111,
-        "macro_recall": 0.3333333333333333,
-        "macro_f1": 0.16666666666666666,
-        "ece": 0.10474536816279095
-    },
-    "confusion_matrix": [
-        [
-            0,
-            7,
-=======
     "model_name": "mobilenet_v3_small_imagenet_pretrained",
     "model_version": "disease_v2",
     "dataset": "PlantVillage (real, colour, 38 classes)",
@@ -76,14 +57,10 @@
             0,
             0,
             0,
->>>>>>> origin/bhavya-feature
             0
         ],
         [
             0,
-<<<<<<< HEAD
-            7,
-=======
             93,
             0,
             0,
@@ -120,20 +97,10 @@
             0,
             0,
             0,
->>>>>>> origin/bhavya-feature
             0
         ],
         [
             0,
-<<<<<<< HEAD
-            7,
-            0
-        ]
-    ],
-    "classes": [
-        "Tomato___Early_blight",
-        "Tomato___Late_blight",
-=======
             0,
             40,
             0,
@@ -1611,7 +1578,6 @@
         "Tomato___Target_Spot",
         "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
         "Tomato___Tomato_mosaic_virus",
->>>>>>> origin/bhavya-feature
         "Tomato___healthy"
     ]
 }

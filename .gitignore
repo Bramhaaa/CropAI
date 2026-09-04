@@ -1,31 +1,3 @@
-<<<<<<< HEAD
-# Environments
-venv/
-ENV/
-env/
-.env
-
-# Python Cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.ipynb_checkpoints/
-
-# Operating System
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-api_server.log
-
-# Streamlit config
-.streamlit/
-
-# User-provided and generated datasets are reproducible from the preparation script
-=======
 # Datasets & raw images
 data/
 
@@ -45,4 +17,3 @@ frontend/dist/
 .pytest_cache/
 .coverage
 htmlcov/
->>>>>>> origin/bhavya-feature

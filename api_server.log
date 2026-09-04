@@ -140,4 +140,3 @@
 2026-08-22 16:35:46,571 [INFO] POST /api/v1/disease/predict status=200 latency=0.2396s model=disease_v1
 2026-08-23 13:54:30,913 [INFO] POST /api/v1/disease/predict status=200 latency=0.3262s model=disease_v1
 2026-08-23 13:56:49,210 [INFO] OPTIONS /api/v1/crop/recommend status=200 latency=0.0007s model=crop_v1
-2026-08-23 13:56:49,344 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1315s model=crop_v1

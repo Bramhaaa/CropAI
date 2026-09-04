@@ -2,17 +2,10 @@
     "model_name": "random_forest_calibrated",
     "model_version": "crop_v2",
     "dataset": "Kaggle Crop Recommendation Dataset",
-<<<<<<< HEAD
     "dataset_hash": "311c6ca90a191cd5d0cf92e875b703cc49d65de213286911c67629a33cb0e031",
-    "git_sha": "04cdebbbf44cbe6a4d85a2b4d406e8ad12791096",
-    "trained_at": "2026-08-21 00:38:26",
-    "training_duration_seconds": 1.55,
-=======
-    "dataset_hash": "c103a7139da5d804e8e030df564327d3baee980c0738dd5593a6a77f4c43eb1f",
-    "git_sha": null,
-    "trained_at": "2026-08-22 11:58:57",
-    "training_duration_seconds": 1.77,
->>>>>>> origin/bhavya-feature
+    "git_sha": "43dbf01d7e5b7dd5ae8bdc542e136cd8a1b523ef",
+    "trained_at": "2026-09-04 12:41:21",
+    "training_duration_seconds": 1.72,
     "random_seed": 42,
     "features": [
         "nitrogen",
@@ -30,11 +23,7 @@
         "macro_f1": 1.0,
         "top_3_accuracy": 1.0,
         "top_5_accuracy": 1.0,
-<<<<<<< HEAD
         "ece": 0.07549257481796483
-=======
-        "ece": 0.07548151575442665
->>>>>>> origin/bhavya-feature
     },
     "confusion_matrix": [
         [
