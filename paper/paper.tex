@@ -20,6 +20,8 @@
 \usepackage{tabularx}
 \usepackage{subcaption}
 \usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
 
 \hypersetup{
   colorlinks=true,
@@ -38,15 +40,20 @@
 % Grouping authors eliminates horizontal tabular column overflow and
 % preserves vital first-page vertical space for the Introduction.
 \author{
-\IEEEauthorblockN{
-Bramha Bajannavar\IEEEauthorrefmark{1},
-Second Author\IEEEauthorrefmark{1},
-Third Author\IEEEauthorrefmark{1},
-Fourth Author\IEEEauthorrefmark{1}, and
-Fifth Author\IEEEauthorrefmark{1}
-}
-\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Science and Engineering, \textit{[TO BE ADDED: Institution Name]}, [City, Country]}
-\IEEEauthorblockA{Email: \{bramha.b, author2, author3, author4, author5\}@institution.edu}
+\IEEEauthorblockN{Monisha H M}
+\IEEEauthorblockA{B.M.S. College of Engineering\\Bengaluru, India\\monishahm.ise@bmsce.ac.in}
+\and
+\IEEEauthorblockN{Bramha Anilkumar Bajannavar}
+\IEEEauthorblockA{B.M.S. College of Engineering\\Bengaluru, India\\bramhaanilkumar.cs23@bmsce.ac.in}
+\and
+\IEEEauthorblockN{Daivya Priyankkumar Shah}
+\IEEEauthorblockA{B.M.S. College of Engineering\\Bengaluru, India\\daivya.cs23@bmsce.ac.in}
+\and
+\IEEEauthorblockN{Bhavya J Makadia}
+\IEEEauthorblockA{B.M.S. College of Engineering\\Bengaluru, India\\bhavyaj.cs23@bmsce.ac.in}
+\and
+\IEEEauthorblockN{Hitesh Sharma}
+\IEEEauthorblockA{B.M.S. College of Engineering\\Bengaluru, India\\hiteshsharma.cs23@bmsce.ac.in}
 }
 
 \begin{document}
@@ -247,19 +254,136 @@ CropAI follows a decoupled, service-oriented architecture separating the ML serv
 
 \begin{figure}[htbp]
   \centering
-  \fbox{\parbox{0.9\columnwidth}{\centering
-    \vspace{2mm}
-    \textbf{[FIGURE TODO: System architecture diagram]}\\[2mm]
-    \small The diagram should show:\\
-    Streamlit Frontend (Port 8501) $\rightarrow$ HTTP/REST $\rightarrow$ FastAPI Backend (Port 8000)\\
-    $\downarrow$ three service branches:\\
-    Disease (MobileNetV3 + Grad-CAM + MC Dropout)\\
-    Crop (Random Forest + SHAP + Calibration)\\
-    Yield (Random Forest + SHAP + Conformal)\\
-    $\downarrow$ Model Artifacts directory
-    \vspace{2mm}
-  }}
-  \caption{High-level system architecture of CropAI. The Streamlit frontend communicates with the FastAPI backend via REST API calls. Each ML module has independent model, explainability, and uncertainty components.}
+  \resizebox{\columnwidth}{!}{%
+  \begin{tikzpicture}[
+    box/.style={draw=black, thick, rectangle, text width=9cm, align=center, inner sep=2mm},
+    arrow/.style={-Latex, thick},
+    biarrow/.style={Latex-Latex, thick},
+    inputflow/.style={-Latex, thick}
+  ]
+  % Node 1
+  \node[box] (L1) {
+    \textbf{1. User Interface Layer}\\[1mm]
+    \hrule
+    \vspace{1mm}
+    \begin{minipage}{0.9\textwidth}
+      \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=0pt, font=\small]
+        \item Farmer Dashboard (Web/Mobile UI)
+        \item Model Selection Interface (Crop, Yield, Disease)
+        \item Input Forms (Soil: N, P, K, pH)
+        \item Input Forms (Weather: Temperature, Rainfall, Humidity)
+        \item Manual and Preset Input Options
+        \item Prediction Results Display
+        \item Risk and Confidence Score Display
+        \item Explainable AI Visualizations (XAI Outputs)
+        \item Error and Validation Messages
+      \end{itemize}
+    \end{minipage}
+  };
+  
+  % Node 2
+  \node[box, below=0.4cm of L1] (L2) {
+    \textbf{2. Presentation Logic Layer}\\[1mm]
+    \hrule
+    \vspace{1mm}
+    \begin{minipage}{0.9\textwidth}
+      \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=0pt, font=\small]
+        \item Handles UI Events and User Interactions
+        \item Validates Input Data
+        \item Transforms Input into Structured Format
+        \item Sends Requests to Backend Services
+        \item Handles Response Formatting
+        \item Displays Feedback and Errors
+      \end{itemize}
+    \end{minipage}
+  };
+
+  % Node 3
+  \node[box, below=0.4cm of L2] (L3) {
+    \textbf{3. Application Logic Layer}\\[1mm]
+    \hrule
+    \vspace{1mm}
+    \begin{minipage}{0.9\textwidth}
+      \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=0pt, font=\small]
+        \item Central Workflow Controller
+        \item Request Routing Engine
+        \item Prediction Pipeline Manager
+        \item Error Handling and Recovery Logic
+        \item Business Logic Implementation
+        \item Coordinates Modules (Input Processing, ML Engine, XAI Module)
+      \end{itemize}
+    \end{minipage}
+  };
+
+  % Node 4
+  \node[box, below=0.4cm of L3] (L4) {
+    \textbf{4. AI / Machine Learning Layer}\\[1mm]
+    \hrule
+    \vspace{1mm}
+    \begin{minipage}{0.9\textwidth}
+      \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=0pt, font=\small]
+        \item Data Preprocessing (Cleaning, Normalization, Feature Engineering)
+        \item Crop Recommendation Model
+        \item Crop Yield Prediction Model
+        \item Disease Detection Model
+        \item Uncertainty Estimation (Monte Carlo Dropout)
+        \item Explainable AI Module (SHAP, LIME)
+        \item Feature Importance Visualization
+        \item Model Inference Engine
+      \end{itemize}
+    \end{minipage}
+  };
+
+  % Node 5
+  \node[box, below=0.4cm of L4] (L5) {
+    \textbf{5. Data Layer}\\[1mm]
+    \hrule
+    \vspace{1mm}
+    \begin{minipage}[t]{0.48\textwidth}
+      \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=0pt, font=\small]
+        \item Soil Data Storage
+        \item Weather Data Storage
+        \item Historical Crop Dataset
+        \item Trained Model Storage
+      \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+      \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=0pt, font=\small]
+        \item User Input Logs
+        \item Prediction History
+        \item System Configuration Files
+      \end{itemize}
+    \end{minipage}
+  };
+
+  % Node 6
+  \node[box, below=0.4cm of L5] (L6) {
+    \textbf{6. External Integration Layer}\\[1mm]
+    \hrule
+    \vspace{1mm}
+    \begin{minipage}{0.9\textwidth}
+      \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=0pt, font=\small]
+        \item Weather APIs (Real-time Data)
+        \item Agricultural Datasets (Kaggle, Government Sources)
+        \item IoT Sensors (Soil Moisture, Temperature)
+        \item External Analytics Services
+      \end{itemize}
+    \end{minipage}
+  };
+
+  % Arrows
+  \draw[arrow] (L1) -- (L2);
+  \draw[arrow] (L2) -- (L3);
+  \draw[biarrow] (L3) -- (L4);
+  \draw[biarrow] (L4) -- (L5);
+  \draw[arrow] (L5) -- (L6);
+
+  % Input Flow Arrow
+  \draw[inputflow] (L6.east) -- ++(0.4,0) |- (L4.east);
+  \end{tikzpicture}%
+  }
+  \caption{High-level system architecture of CropAI. The 6-layer architecture decouples presentation, application logic, and ML model serving, and integrates with external agricultural and weather services.}
   \label{fig:architecture}
 \end{figure}
 
