@@ -35,6 +35,16 @@ export const api = {
     return response.data;
   },
 
+  async recommendIndianCrop(payload) {
+    const response = await client.post('/api/v1/crop/recommend-india', payload);
+    return response.data;
+  },
+
+  async getIndianCropLocations() {
+    const response = await client.get('/api/v1/crop/recommend-india/locations');
+    return response.data;
+  },
+
   // Yield Prediction
   async predictYield(payload) {
     const response = await client.post('/api/v1/yield/predict', payload);

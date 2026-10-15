@@ -19,12 +19,7 @@ export function OverviewDashboard({ setActiveTab }) {
       </div>
 
       {/* System Key Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <MetricCard
-          label="CROP RECOMMENDATION"
-          value="100.0%"
-          badge="MODEL 1"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard
           label="DISEASE DIAGNOSIS"
           value="99.17%"
@@ -36,9 +31,9 @@ export function OverviewDashboard({ setActiveTab }) {
           badge="MODEL 3"
         />
         <MetricCard
-          label="CONFORMAL BOUNDS"
-          value="94.83%"
-          badge="MAPIE"
+          label="CROP RECOMMENDATION ACCURACY"
+          value="100.0%"
+          badge="TEST SET"
         />
       </div>
 

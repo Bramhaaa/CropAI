@@ -72,6 +72,9 @@ python3 training/disease/train_disease.py
 # 2. Train Crop Recommendation Classifier (Calibrated Random Forest)
 python3 training/crop/train_crop.py
 
+# Train Indian district-level crop ranker
+python3 training/crop/train_crop_indian.py
+
 # 3. Train Crop Yield Regressor (Random Forest + Conformal Residuals)
 python3 training/yield/train_yield.py
 ```
@@ -163,6 +166,20 @@ This command compiles the `Dockerfile` into separate communicating services on a
     "confidence_level": 0.90
   }
   ```
+
+### 5. Indian District Crop Recommendation
+`POST /api/v1/crop/recommend-india` (Content-Type: `application/json`)
+- **Payload:**
+  ```json
+  {
+    "state": "Punjab",
+    "district": "Ludhiana",
+    "year": 2017,
+    "top_k": 5
+  }
+  ```
+- **Response:** ranked crops with predicted historical yield in kg/hectare.
+- **Data:** [data/processed/recommendation_indian/](data/processed/recommendation_indian/)
 - **Response:**
   ```json
   {

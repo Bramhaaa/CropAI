@@ -56,6 +56,29 @@ def test_crop_recommendation_missing_param():
     response = client.post("/api/v1/crop/recommend", json=payload)
     assert response.status_code == 422  # Validation Error
 
+
+def test_indian_crop_recommendation_valid():
+    response = client.post(
+        "/api/v1/crop/recommend-india",
+        json={"state": "Punjab", "district": "Ludhiana", "year": 2017, "top_k": 3},
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["model_version"] == "crop_indian_recommender_v2"
+    assert len(data["recommendations"]) == 3
+    assert all("crop" in item for item in data["recommendations"])
+    assert "recommended_crop" in data
+    assert all("predicted_yield_kg_per_hectare" not in item for item in data["recommendations"])
+
+
+def test_indian_crop_recommendation_invalid_top_k():
+    response = client.post(
+        "/api/v1/crop/recommend-india",
+        json={"state": "Punjab", "district": "Ludhiana", "top_k": 11},
+    )
+    assert response.status_code == 422
+
+
 def test_yield_prediction_valid():
     payload = {
         "state": "Punjab",

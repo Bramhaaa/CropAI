@@ -6,7 +6,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 import importlib
-from api.dependencies import get_disease_service, get_crop_service, get_yield_service
+from api.dependencies import (
+    get_crop_indian_service,
+    get_crop_service,
+    get_disease_service,
+    get_yield_service,
+)
 from api.routes import disease, crop
 yield_route = importlib.import_module("api.routes.yield")
 
@@ -27,6 +32,7 @@ async def lifespan(app: FastAPI):
     try:
         get_disease_service()
         get_crop_service()
+        get_crop_indian_service()
         get_yield_service()
         logging.info("All ML model checkpoints successfully pre-loaded in memory.")
     except Exception as e:
@@ -106,6 +112,7 @@ async def health_check():
         "models_loaded": {
             "disease": _check(get_disease_service),
             "crop": _check(get_crop_service),
+            "crop_indian": _check(get_crop_indian_service),
             "yield": _check(get_yield_service),
         }
     }

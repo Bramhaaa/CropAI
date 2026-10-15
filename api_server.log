@@ -138,5 +138,76 @@
 2026-08-22 16:18:02,263 [INFO] POST /api/v1/yield/predict status=200 latency=0.0484s model=yield_v1
 2026-08-22 16:18:11,065 [INFO] POST /api/v1/yield/predict status=200 latency=0.0488s model=yield_v1
 2026-08-22 16:35:46,571 [INFO] POST /api/v1/disease/predict status=200 latency=0.2396s model=disease_v1
-2026-08-23 13:54:30,913 [INFO] POST /api/v1/disease/predict status=200 latency=0.3262s model=disease_v1
-2026-08-23 13:56:49,210 [INFO] OPTIONS /api/v1/crop/recommend status=200 latency=0.0007s model=crop_v1
+2026-08-23 13:54:30,913 [INFO] POST /api/v1/disease/predict status=200 latency=0.3262s model=disease_v12026-09-11 13:43:54,930 [INFO] OPTIONS /api/v1/crop/recommend status=200 latency=0.0000s model=crop_v1
+2026-09-11 13:43:55,100 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1664s model=crop_v1
+2026-09-11 13:44:43,203 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1784s model=crop_v1
+2026-09-11 13:45:03,397 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1974s model=crop_v1
+2026-09-11 13:45:07,297 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1991s model=crop_v1
+2026-09-11 13:45:11,530 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1674s model=crop_v1
+2026-09-11 13:45:17,980 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1712s model=crop_v1
+2026-09-11 13:45:24,482 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1415s model=crop_v1
+2026-09-11 13:45:27,847 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1717s model=crop_v1
+2026-09-11 13:46:06,706 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1707s model=crop_v1
+2026-09-11 13:48:27,156 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1838s model=crop_v1
+2026-09-11 14:15:42,760 [INFO] OPTIONS /api/v1/yield/predict status=200 latency=0.0000s model=yield_v1
+2026-09-11 14:15:43,043 [INFO] POST /api/v1/yield/predict status=200 latency=0.2787s model=yield_v1
+2026-09-11 14:15:48,334 [INFO] POST /api/v1/yield/predict status=200 latency=0.1706s model=yield_v1
+2026-09-11 14:15:52,476 [INFO] POST /api/v1/yield/predict status=200 latency=0.2070s model=yield_v1
+2026-09-11 14:16:01,248 [INFO] POST /api/v1/yield/predict status=200 latency=0.6155s model=yield_v1
+2026-09-11 14:16:07,447 [INFO] POST /api/v1/yield/predict status=200 latency=0.1728s model=yield_v1
+2026-09-11 14:16:29,407 [INFO] POST /api/v1/yield/predict status=200 latency=0.2143s model=yield_v1
+2026-09-11 14:16:58,074 [INFO] POST /api/v1/yield/predict status=200 latency=0.1953s model=yield_v1
+2026-10-15 12:00:19,167 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-10-15 12:00:19,927 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-10-15 12:00:56,008 [INFO] GET /health status=200 latency=0.0010s model=unknown
+2026-10-15 12:00:56,386 [INFO] POST /api/v1/crop/recommend status=200 latency=0.3001s model=crop_v1
+2026-10-15 12:00:56,408 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.0120s model=crop_v1
+2026-10-15 12:00:56,708 [INFO] POST /api/v1/yield/predict status=200 latency=0.2968s model=yield_v1
+2026-10-15 12:00:57,551 [INFO] POST /api/v1/disease/predict status=200 latency=0.7223s model=disease_v1
+2026-10-15 12:01:08,365 [INFO] POST /api/v1/crop/recommend status=200 latency=0.3639s model=crop_v1
+2026-10-15 12:01:08,377 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.0030s model=crop_v1
+2026-10-15 12:01:08,664 [INFO] POST /api/v1/yield/predict status=200 latency=0.2812s model=yield_v1
+2026-10-15 12:01:09,049 [INFO] POST /api/v1/disease/predict status=200 latency=0.2763s model=disease_v1
+2026-10-15 12:01:18,028 [INFO] POST /api/v1/crop/recommend status=200 latency=0.2285s model=crop_v1
+2026-10-15 12:02:01,169 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-10-15 12:02:01,413 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-10-15 12:02:32,987 [INFO] GET /health status=200 latency=0.0010s model=unknown
+2026-10-15 12:02:33,224 [INFO] POST /api/v1/crop/recommend status=200 latency=0.1883s model=crop_v1
+2026-10-15 12:05:16,269 [INFO] GET /docs status=200 latency=0.0000s model=unknown
+2026-10-15 12:05:16,951 [INFO] GET /openapi.json status=200 latency=0.0154s model=unknown
+2026-10-15 12:10:05,055 [INFO] GET /health status=200 latency=0.0010s model=unknown
+2026-10-15 12:10:20,486 [INFO] OPTIONS /api/v1/crop/recommend status=200 latency=0.0000s model=crop_v1
+2026-10-15 12:10:20,871 [INFO] POST /api/v1/crop/recommend status=200 latency=0.3810s model=crop_v1
+2026-10-15 12:12:27,488 [INFO] POST /api/v1/crop/recommend-india status=422 latency=0.0010s model=crop_v1
+2026-10-15 12:12:35,788 [INFO] POST /api/v1/crop/recommend-india status=422 latency=0.0027s model=crop_v1
+2026-10-15 12:12:40,351 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.0080s model=crop_v1
+2026-10-15 12:12:52,369 [INFO] OPTIONS /api/v1/crop/recommend-india status=200 latency=0.0000s model=crop_v1
+2026-10-15 12:12:52,385 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.0020s model=crop_v1
+2026-10-15 12:16:34,551 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.0030s model=crop_v1
+2026-10-15 12:17:56,892 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.2386s model=crop_v1
+2026-10-15 12:18:47,564 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.3159s model=crop_v1
+2026-10-15 12:20:15,403 [INFO] GET /api/v1/crop/recommend-india/locations status=404 latency=0.0010s model=crop_v1
+2026-10-15 12:20:40,297 [INFO] GET /api/v1/crop/recommend-india/locations status=404 latency=0.0010s model=crop_v1
+2026-10-15 12:22:01,580 [INFO] Lifespan startup: Pre-loading ML model checkpoints...
+2026-10-15 12:22:02,087 [INFO] All ML model checkpoints successfully pre-loaded in memory.
+2026-10-15 12:22:24,257 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0030s model=crop_v1
+2026-10-15 12:22:32,130 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0010s model=crop_v1
+2026-10-15 12:22:32,136 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0020s model=crop_v1
+2026-10-15 12:22:43,523 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.1990s model=crop_v1
+2026-10-15 12:23:03,124 [INFO] OPTIONS /api/v1/yield/predict status=200 latency=0.0010s model=yield_v1
+2026-10-15 12:23:03,337 [INFO] POST /api/v1/yield/predict status=200 latency=0.2090s model=yield_v1
+2026-10-15 12:23:05,392 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0023s model=crop_v1
+2026-10-15 12:23:05,396 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0020s model=crop_v1
+2026-10-15 12:27:30,175 [INFO] OPTIONS /api/v1/crop/recommend-india status=200 latency=0.0000s model=crop_v1
+2026-10-15 12:27:30,428 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.2469s model=crop_v1
+2026-10-15 12:28:10,715 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0030s model=crop_v1
+2026-10-15 12:28:10,719 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0020s model=crop_v1
+2026-10-15 12:30:29,127 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0020s model=crop_v1
+2026-10-15 12:30:29,134 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0020s model=crop_v1
+2026-10-15 12:30:38,512 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.2049s model=crop_v1
+2026-10-15 12:35:51,470 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0030s model=crop_v1
+2026-10-15 12:35:51,480 [INFO] GET /api/v1/crop/recommend-india/locations status=200 latency=0.0020s model=crop_v1
+2026-10-15 12:36:07,207 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.1812s model=crop_v1
+2026-10-15 12:36:37,129 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.1664s model=crop_v1
+2026-10-15 12:38:04,463 [INFO] OPTIONS /api/v1/crop/recommend-india status=200 latency=0.0000s model=crop_v1
+2026-10-15 12:38:04,637 [INFO] POST /api/v1/crop/recommend-india status=200 latency=0.1698s model=crop_v1

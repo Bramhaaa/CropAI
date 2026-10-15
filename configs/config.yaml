@@ -10,6 +10,10 @@ models:
     scaler_path: artifacts/crop/scaler.pkl
     metadata_path: artifacts/crop/metadata.json
 
+  crop_indian:
+    path: artifacts/crop_indian/model.pkl
+    metadata_path: artifacts/crop_indian/metadata.json
+
   yield:
     path: artifacts/yield/model.pkl
     scaler_path: artifacts/yield/scaler.pkl

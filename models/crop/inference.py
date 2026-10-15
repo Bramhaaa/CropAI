@@ -72,5 +72,5 @@ class CropInferenceService:
             "reliability": reliability,
             "features": raw_features,
             "scaled_features": scaled_features,
-            "model_version": "crop_v1"
+            "model_version": "crop_v2"
         }

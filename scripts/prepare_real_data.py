@@ -51,6 +51,66 @@ def prepare_recommendation() -> None:
     print(f"Recommendation: {len(frame)} rows, {frame['label'].nunique()} classes")
 
 
+def prepare_indian_recommendation() -> None:
+    """Normalize the Indian district/year crop outcomes into crop-level rows."""
+    source = RAW / "recommendation" / "Crops_data.csv"
+    frame = pd.read_csv(source)
+    required = {"Dist Code", "Year", "State Code", "State Name", "Dist Name"}
+    if not required.issubset(frame.columns):
+        raise ValueError(f"Unexpected Indian recommendation columns: {list(frame.columns)}")
+
+    rows: list[dict[str, object]] = []
+    excluded = ("OILSEEDS", "SORGHUM", "PULSES", "FRUITS", "VEGETABLES", "FODDER")
+    for yield_column in (column for column in frame.columns if column.endswith(" YIELD (Kg per ha)")):
+        crop_name = yield_column.removesuffix(" YIELD (Kg per ha)").strip()
+        if any(term in crop_name.upper() for term in excluded):
+            continue
+        area_column = f"{crop_name} AREA (1000 ha)"
+        production_column = f"{crop_name} PRODUCTION (1000 tons)"
+        if area_column not in frame.columns or production_column not in frame.columns:
+            continue
+
+        crop_rows = frame[
+            ["Dist Code", "Year", "State Code", "State Name", "Dist Name",
+             area_column, production_column, yield_column]
+        ].copy()
+        crop_rows.columns = [
+            "district_code", "year", "state_code", "state", "district",
+            "area_thousand_hectares", "production_thousand_tonnes", "yield_kg_per_hectare",
+        ]
+        for numeric_column in (
+            "district_code", "year", "state_code", "area_thousand_hectares",
+            "production_thousand_tonnes", "yield_kg_per_hectare",
+        ):
+            crop_rows[numeric_column] = pd.to_numeric(crop_rows[numeric_column], errors="coerce")
+        crop_rows["state"] = crop_rows["state"].astype("string").str.strip()
+        crop_rows["district"] = crop_rows["district"].astype("string").str.strip()
+        crop_rows = crop_rows[
+            crop_rows["yield_kg_per_hectare"].notna()
+            & (crop_rows["yield_kg_per_hectare"] > 0)
+        ].copy()
+        crop_rows.insert(5, "crop", crop_name.title())
+        rows.extend(crop_rows.to_dict("records"))
+
+    normalized = pd.DataFrame(rows)
+    if normalized.empty or len(normalized) < 20_000:
+        raise ValueError(f"Indian recommendation normalization produced only {len(normalized)} rows.")
+    normalized = normalized.sort_values(["year", "state", "district", "crop"]).reset_index(drop=True)
+
+    output_dir = PROCESSED / "recommendation_indian"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    normalized.to_csv(output_dir / "all.csv", index=False)
+    train = normalized[normalized["year"] <= normalized["year"].max() - 2]
+    validation = normalized[normalized["year"] == normalized["year"].max() - 1]
+    test = normalized[normalized["year"] == normalized["year"].max()]
+    for name, split in (("train", train), ("val", validation), ("test", test)):
+        split.to_csv(output_dir / f"{name}.csv", index=False)
+    print(
+        f"Indian recommendation: {len(normalized)} rows, "
+        f"{normalized['crop'].nunique()} crops, {normalized['state'].nunique()} states"
+    )
+
+
 def prepare_disease() -> None:
     image_root = RAW / "disease" / "plantvillage" / "raw" / "color"
     if not image_root.is_dir():
@@ -126,13 +186,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--module",
-        choices=("all", "disease", "recommendation", "yield"),
+        choices=("all", "disease", "recommendation", "recommendation_indian", "yield"),
         default="all",
         help="Dataset preparation target.",
     )
     args = parser.parse_args()
     if args.module in ("all", "recommendation"):
         prepare_recommendation()
+    if args.module in ("all", "recommendation_indian"):
+        prepare_indian_recommendation()
     if args.module in ("all", "yield"):
         prepare_yield()
     if args.module in ("all", "disease"):
